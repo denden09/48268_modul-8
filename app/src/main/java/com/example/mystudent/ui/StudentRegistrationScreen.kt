@@ -25,6 +25,7 @@ fun StudentRegistrationScreen(viewModel: StudentViewModel = viewModel()) {
             .padding(16.dp)
             .fillMaxSize()
     ) {
+        // Input Student ID
         TextField(
             value = studentId,
             onValueChange = { studentId = it },
@@ -33,6 +34,7 @@ fun StudentRegistrationScreen(viewModel: StudentViewModel = viewModel()) {
         )
         Spacer(modifier = Modifier.height(8.dp))
 
+        // Input Name
         TextField(
             value = name,
             onValueChange = { name = it },
@@ -41,6 +43,7 @@ fun StudentRegistrationScreen(viewModel: StudentViewModel = viewModel()) {
         )
         Spacer(modifier = Modifier.height(8.dp))
 
+        // Input Program
         TextField(
             value = program,
             onValueChange = { program = it },
@@ -49,7 +52,11 @@ fun StudentRegistrationScreen(viewModel: StudentViewModel = viewModel()) {
         )
         Spacer(modifier = Modifier.height(8.dp))
 
-        Row(verticalAlignment = Alignment.CenterVertically) {
+        // Input Phone Number + Add Button
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier.fillMaxWidth()
+        ) {
             TextField(
                 value = currentPhone,
                 onValueChange = { currentPhone = it },
@@ -67,6 +74,7 @@ fun StudentRegistrationScreen(viewModel: StudentViewModel = viewModel()) {
             }
         }
 
+        // Menampilkan daftar nomor telepon yang sudah diinput
         if (phoneList.isNotEmpty()) {
             Text(
                 text = "Phone Numbers:",
@@ -78,6 +86,9 @@ fun StudentRegistrationScreen(viewModel: StudentViewModel = viewModel()) {
             }
         }
 
+        Spacer(modifier = Modifier.height(16.dp))
+
+        // Tombol Submit
         Button(
             onClick = {
                 if (studentId.isNotBlank() && name.isNotBlank() && program.isNotBlank()) {
@@ -88,13 +99,14 @@ fun StudentRegistrationScreen(viewModel: StudentViewModel = viewModel()) {
                     phoneList = listOf()
                 }
             },
-            modifier = Modifier.padding(top = 16.dp)
+            modifier = Modifier.fillMaxWidth()
         ) {
             Text("Submit")
         }
 
         Divider(modifier = Modifier.padding(vertical = 16.dp))
 
+        // Daftar mahasiswa dari Firebase
         Text("Student List", style = MaterialTheme.typography.titleMedium)
 
         LazyColumn {
@@ -103,7 +115,6 @@ fun StudentRegistrationScreen(viewModel: StudentViewModel = viewModel()) {
                     Text("ID: ${student.id}")
                     Text("Name: ${student.name}")
                     Text("Program: ${student.program}")
-                    // Note: Saat fetch belum ambil phones dari subcollection
                     Divider()
                 }
             }

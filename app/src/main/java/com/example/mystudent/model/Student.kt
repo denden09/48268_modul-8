@@ -6,3 +6,4 @@ data class Student(
     val program: String = "",
     val phones: List<String> = emptyList()
 )
+
